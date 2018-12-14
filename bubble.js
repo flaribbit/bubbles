@@ -19,7 +19,7 @@ function UpdateBubbles(){
 		dx=bubbles[i].x-gc.width/2;
 		dy=bubbles[i].y-gc.height/2;
 		distance=Math.sqrt(dx*dx+dy*dy);
-		if(distance>gc.height/4){
+		if(distance>Math.min(gc.height,gc.width)/4){
 			bubbles[i].x-=dx/distance*kmove/5;
 			bubbles[i].y-=dy/distance*kmove/5;
 		}
@@ -48,7 +48,7 @@ var ctx=gc.getContext("2d");
 var bubbles=[];
 var kmove=0.4;
 (function(){
-	for(var i=0;i<100;i++){
+	for(var i=0;i<200;i++){
 		var bubble=new Bubble();
 		bubble.x=Math.random()*gc.width;
 		bubble.y=Math.random()*gc.height;
