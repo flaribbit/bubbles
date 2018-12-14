@@ -20,18 +20,18 @@ function UpdateBubbles(){
 		dy=bubbles[i].y-gc.height/2;
 		distance=Math.sqrt(dx*dx+dy*dy);
 		if(distance>Math.min(gc.height,gc.width)/4){
-			bubbles[i].x-=dx/distance*kmove/5;
-			bubbles[i].y-=dy/distance*kmove/5;
+			bubbles[i].x-=dx/distance*gravitation;
+			bubbles[i].y-=dy/distance*gravitation;
 		}
 		for(var j=i+1;j<bubbles.length;j++){
 			dx=bubbles[j].x-bubbles[i].x;
 			dy=bubbles[j].y-bubbles[i].y;
 			distance=Math.sqrt(dx*dx+dy*dy);
 			if(distance<bubbles[i].r+bubbles[j].r){
-				bubbles[i].x+=dx/distance*(distance-bubbles[i].r-bubbles[j].r)*kmove;
-				bubbles[i].y+=dy/distance*(distance-bubbles[i].r-bubbles[j].r)*kmove;
-				bubbles[j].x-=dx/distance*(distance-bubbles[i].r-bubbles[j].r)*kmove;
-				bubbles[j].y-=dy/distance*(distance-bubbles[i].r-bubbles[j].r)*kmove;
+				bubbles[i].x+=dx/distance*(distance-bubbles[i].r-bubbles[j].r)*elasticity;
+				bubbles[i].y+=dy/distance*(distance-bubbles[i].r-bubbles[j].r)*elasticity;
+				bubbles[j].x-=dx/distance*(distance-bubbles[i].r-bubbles[j].r)*elasticity;
+				bubbles[j].y-=dy/distance*(distance-bubbles[i].r-bubbles[j].r)*elasticity;
 			}
 		}
 	}
@@ -46,7 +46,8 @@ function update(){
 
 var ctx=gc.getContext("2d");
 var bubbles=[];
-var kmove=0.4;
+var elasticity=0.6;
+var gravitation=0.2;
 (function(){
 	for(var i=0;i<200;i++){
 		var bubble=new Bubble();
